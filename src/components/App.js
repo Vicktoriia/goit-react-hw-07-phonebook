@@ -1,28 +1,20 @@
-import Section from './Section/Section';
-import ContactForm from './ContactForm/ContactForm';
-import Filter from './Filter/Filter';
-import ContactList from './ContactList/ContactList';
+import { useEffect } from 'react';
+import { useDispatch} from 'react-redux';
+import { fetchContacts } from '../redux/operations';
+import  Phonebook  from '../Pages/Phonebook';
 
-const App = () => (
+ const App = () => {
+   const dispatch = useDispatch();
 
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 20,
-      }}
-    >
-      <Section title="Phonebook">
-        <ContactForm/>
-      </Section>
-      <Section title="Contacts">
-        <Filter/>
-        <ContactList/>
-      </Section>
-    </div>
-  );
+   useEffect(() => {
+     dispatch(fetchContacts());
+   }, [dispatch]);
 
+   return (
+     <>
+       <Phonebook />
+     </>
+   );
+ };
 
 export default App;
